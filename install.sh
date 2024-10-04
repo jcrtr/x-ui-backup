@@ -4,7 +4,6 @@ mkdir /app/x-ui-backup
 sudo apt install -y python3-pip
 pip3 install python-telegram-bot
 python3 -m pip install --user telebot
-clear
 
 echo "
  [Unit]
