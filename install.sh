@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir /app/x-ui-backup
+mkdir -p /app/x-ui-backup
 
 sudo apt install -y python3-pip
 pip3 install python-telegram-bot
