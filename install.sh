@@ -41,7 +41,7 @@ interval = $3 * 60
 
 while True:
     # Compose the message with the server hostname, IP address, and database file
-    message = f\"SERVER NAME: #{hostname}\n\n IP: #ip_{ip_address})\n\"
+    message = f\"SERVER NAME: #{hostname}\n\nIP: {ip_address}\n\"
     with open(db_path, \"rb\") as file:
         bot.send_document(chat_id, file, caption=message)
     # Sleep for the specified interval
