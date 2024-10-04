@@ -8,7 +8,7 @@ clear
 
 echo "
  [Unit]
- Description=My Telegram Bot $1
+ Description=My Telegram Bot $0
 
  [Service]
  User=root
