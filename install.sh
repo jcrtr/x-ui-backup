@@ -24,10 +24,10 @@ import os
 import time
 import telebot
 # Set up the bot
-bot = telebot.TeleBot(\"$2\")
+bot = telebot.TeleBot(\"$1\")
 
 # Set the chat ID to send the file to
-chat_id = \"$3\"
+chat_id = \"$2\"
 
 # Get the hostname and IP address of the current server
 hostname = os.uname().nodename
@@ -37,7 +37,7 @@ ip_address = os.popen(\"curl -s https://api.ipify.org\").read().strip()
 db_path = \"/etc/x-ui/x-ui.db\"
 
 # Set the interval to send the file (in seconds)
-interval = $min * 60
+interval = $3 * 60
 
 while True:
     # Compose the message with the server hostname, IP address, and database file
