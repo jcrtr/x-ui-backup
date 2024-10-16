@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir -p /app/3x-ban-tg
+mkdir -p /app/tgban
 
 sudo apt install -y python3-pip
 pip3 install python-telegram-bot
@@ -11,8 +11,8 @@ echo "
 
  [Service]
  User=root
- WorkingDirectory=/app/3x-ban-tg/
- ExecStart=/usr/bin/python3 /3x-ban-tg/main.py
+ WorkingDirectory=/app/tgban/
+ ExecStart=/usr/bin/python3 /tgban/main.py
  Restart=always
 
  [Install]
@@ -67,7 +67,7 @@ def main():
 if __name__ == '__main__':
     while True:
         main()
-        time.sleep(10 * 60)> " > /app/3x-ban-tg/main.py
+        time.sleep(10 * 60)> " > /app/tgban/main.py
 
 systemctl daemon-reload
 systemctl start 3x-ban-tg
