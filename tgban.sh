@@ -32,7 +32,7 @@ chat_id = \"$2\"
 TIME = 5
 
 date_format_code = '%Y/%m/%d %H:%M:%S'
-time_now = d.datetime.now() - d.timedelta(minutes=5)
+
 
 # message user tg
 def tg_message():
@@ -42,11 +42,11 @@ def tg_message():
     bot.send_message(chat_id, message, parse_mode='HTML')
 
 # tg sent admin
-def tg_admin_message(user_id, status, ip):
-    message = f\" 👤\n└ ID: #ID_{user_id}\n└ STATUS: #{status}\"
+def tg_admin_message(user_id, status, date):
+    message = f\" 👤\n└ ID: #ID_{user_id}\n └ STATUS: #{status}\n └ DATE: #{date}\"
     bot.send_message(chat_id, message, parse_mode='HTML')
 
-def main():
+def main(time_now):
     with open('/var/log/3xipl-banned.log', 'r') as log:
         for line in log.readlines():
             print(line)
@@ -60,14 +60,15 @@ def main():
             if status == 'BAN':
                 if time > time_now:
 #                    # tg_message()
-                    tg_admin_message(user_id, status, ip)
+                    tg_admin_message(user_id, status, time)
             else:
                 if time > time_now:
-                    tg_admin_message(user_id, status, ip)
+                    tg_admin_message(user_id, status, time)
 
 if __name__ == '__main__':
     while True:
-        main()
+        time_now = d.datetime.now() - d.timedelta(minutes=5)
+        main(time_now)
         time.sleep(TIME * 60)" > /app/tgban/main.py
 
 systemctl daemon-reload
