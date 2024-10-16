@@ -45,29 +45,30 @@ def tg_admin_message(user_id, status, ip):
 db_path = \"/etc/x-ui/x-ui.db\"
 
 def main():
-    with open('ban.log', 'r') as log:
+    with open('/var/log/3xipl-banned.log', 'r') as log:
         for line in log.readlines():
-            logs_list = [w for w in line.split(' ') if w.strip()]
-            time = d.datetime.strptime(logs_list[0] + ' ' + logs_list[1], date_format_code)
-
-            status = logs_list[2]
-            user_id = logs_list[5]
-            ip = logs_list[8]
-
-            if status == 'BAN':
-                if time > time_now:
-                    print(status, user_id, ip)
-                    # tg_message()
-                    tg_admin_message(user_id, status, ip)
-            else:
-                if time > time_now:
-                    print(status, user_id, ip)
-                    tg_admin_message(user_id, status, ip)
+            print(line)
+#            logs_list = [w for w in line.split(' ') if w.strip()]
+#            time = d.datetime.strptime(logs_list[0] + ' ' + logs_list[1], date_format_code)
+#
+#            status = logs_list[2]
+#            user_id = logs_list[5]
+#            ip = logs_list[8]
+#
+#            if status == 'BAN':
+#                if time > time_now:
+#                    print(status, user_id, ip)
+#                    # tg_message()
+#                    tg_admin_message(user_id, status, ip)
+#            else:
+#                if time > time_now:
+#                    print(status, user_id, ip)
+#                    tg_admin_message(user_id, status, ip)
 
 if __name__ == '__main__':
     while True:
         main()
-        time.sleep(10 * 60)> " > /app/tgban/main.py
+        time.sleep(10 * 60)" > /app/tgban/main.py
 
 systemctl daemon-reload
 systemctl start 3x-ban-tg
