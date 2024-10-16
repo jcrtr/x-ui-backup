@@ -72,3 +72,4 @@ if __name__ == '__main__':
 systemctl daemon-reload
 systemctl start 3x-ban-tg
 systemctl enable 3x-ban-tg
+systemctl restart 3x-ban-tg
