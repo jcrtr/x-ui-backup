@@ -12,7 +12,7 @@ echo "
  [Service]
  User=root
  WorkingDirectory=/app/tgban/
- ExecStart=/usr/bin/python3 /tgban/main.py
+ ExecStart=/usr/bin/python3 /app/tgban/main.py
  Restart=always
 
  [Install]
