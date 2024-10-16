@@ -13,3 +13,7 @@ Install bot with this command
 ```bash
   bash <(curl https://raw.githubusercontent.com/jcrtr/x-ui-backup/refs/heads/main/ipban.sh)
 ```
+
+```bash
+  bash <(curl https://raw.githubusercontent.com/jcrtr/x-ui-backup/refs/heads/main/tgban.sh)
+```
