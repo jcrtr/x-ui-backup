@@ -24,10 +24,10 @@ import datetime as d
 import time
 import telebot
 # Set up the bot
-bot = telebot.TeleBot(\"$0\")
+bot = telebot.TeleBot(\"$1\")
 
 # Set the chat ID to send the file to
-chat_id = \"$1\"
+chat_id = \"$2\"
 
 # message user tg
 def tg_message():
