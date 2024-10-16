@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir -p /app/tgban3x
+mkdir -p /app/3x-ban-tg
 
 sudo apt install -y python3-pip
 pip3 install python-telegram-bot
