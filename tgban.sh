@@ -46,9 +46,6 @@ def tg_admin_message(user_id, status, ip):
     message = f\" 👤\n└ ID: #ID_{user_id}\n└ STATUS: #{status}\"
     bot.send_message(chat_id, message, parse_mode='HTML')
 
-# Set the path to the database file
-db_path = \"/etc/x-ui/x-ui.db\"
-
 def main():
     with open('/var/log/3xipl-banned.log', 'r') as log:
         for line in log.readlines():
