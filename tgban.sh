@@ -4,6 +4,7 @@ mkdir -p /app/tgban
 sudo apt install -y python3-pip
 pip3 install python-telegram-bot
 python3 -m pip install --user telebot
+pip3 install python-dotenv
 pip3 install supabase
 
 echo "
@@ -29,22 +30,27 @@ SUPABASE_KEY=\"$4\"
 
 # shellcheck disable=SC2028
 echo "
+
 import datetime as d
 import time
 import telebot
+from dotenv import load_dotenv
 from supabase import create_client, Client
+
+load_dotenv()
+
 # Set up the bot
-bot = telebot.TeleBot(os.environ.get(\"TIME\")
+bot = telebot.TeleBot(os.getenv(\"BOT_TOKEN\"))
 
 # Set the chat ID to send the file to
-chat_id = os.environ.get(\"CHAT_ID\")
+chat_id = os.getenv(\"CHAT_ID\")
 
-TIME = os.environ.get(\"TIME\")
+TIME = os.getenv(\"TIME\")
 
 date_format_code = '%Y/%m/%d %H:%M:%S'
 
-url: str = os.environ.get(\"SUPABASE_URL\")
-key: str = os.environ.get(\"SUPABASE_KEY\")
+url: str = os.getenv(\"SUPABASE_URL\")
+key: str = os.getenv(\"SUPABASE_KEY\")
 supabase: Client = create_client(url, key)
 
 # message user tg
