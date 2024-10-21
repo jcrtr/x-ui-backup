@@ -94,7 +94,7 @@ if __name__ == '__main__':
     while True:
         time_now = d.datetime.now() - d.timedelta(minutes=5)
         main(time_now)
-        time.sleep(TIME * 60)" > /app/tgban/main.py
+        time.sleep(int(TIME) * 60)" > /app/tgban/main.py
 
 systemctl daemon-reload
 systemctl start 3x-ban-tg
