@@ -4,6 +4,7 @@ mkdir -p /app/tgban
 sudo apt install -y python3-pip
 pip3 install python-telegram-bot
 python3 -m pip install --user telebot
+pip3 install supabase
 
 echo "
  [Unit]
@@ -18,21 +19,33 @@ echo "
  [Install]
  WantedBy=multi-user.target" > /etc/systemd/system/3x-ban-tg.service
 
+echo "
+TIME = 5
+BOT_TOKEN=\"$1\"
+CHAT_ID=\"$2\"
+SUPABASE_URL=\"$3\"
+SUPABASE_KEY=\"$4\"
+" > /app/tgban/.env
+
 # shellcheck disable=SC2028
 echo "
 import datetime as d
 import time
 import telebot
+from supabase import create_client, Client
 # Set up the bot
-bot = telebot.TeleBot(\"$1\")
+bot = telebot.TeleBot(os.environ.get(\"TIME\")
 
 # Set the chat ID to send the file to
-chat_id = \"$2\"
+chat_id = os.environ.get(\"CHAT_ID\")
 
-TIME = 5
+TIME = os.environ.get(\"TIME\")
 
 date_format_code = '%Y/%m/%d %H:%M:%S'
 
+url: str = os.environ.get(\"SUPABASE_URL\")
+key: str = os.environ.get(\"SUPABASE_KEY\")
+supabase: Client = create_client(url, key)
 
 # message user tg
 def tg_message():
@@ -49,21 +62,27 @@ def tg_admin_message(user_id, status, date):
 def main(time_now):
     with open('/var/log/3xipl-banned.log', 'r') as log:
         for line in log.readlines():
-            print(line)
             logs_list = [w for w in line.split(' ') if w.strip()]
             time = d.datetime.strptime(logs_list[0] + ' ' + logs_list[1], date_format_code)
 
             status = logs_list[2]
             user_id = logs_list[5]
             ip = logs_list[8]
+            if time > time_now:
+                if status == 'BAN':
+                    if time > time_now:
+                        # tg_message()
+                        tg_admin_message(user_id, status, time)
+                else:
+                    if time > time_now:
+                        tg_admin_message(user_id, status, time)
 
-            if status == 'BAN':
-                if time > time_now:
-#                    # tg_message()
-                    tg_admin_message(user_id, status, time)
-            else:
-                if time > time_now:
-                    tg_admin_message(user_id, status, time)
+                try:
+                    supabase.table("ban").insert(
+                        {'created_at': int(time.timestamp()), 'user_id': user_id, 'status': status}).execute()
+                    print('CREATE')
+                except Exception as exception:
+                    print(exception)
 
 if __name__ == '__main__':
     while True:
