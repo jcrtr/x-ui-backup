@@ -84,7 +84,7 @@ def main(time_now):
                         tg_admin_message(user_id, status, time)
 
                 try:
-                    supabase.table("ban").insert(
+                    supabase.table(\"ban\").insert(
                         {'created_at': int(time.timestamp()), 'user_id': user_id, 'status': status}).execute()
                     print('CREATE')
                 except Exception as exception:
