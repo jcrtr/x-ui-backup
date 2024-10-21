@@ -30,7 +30,7 @@ SUPABASE_KEY=\"$4\"
 
 # shellcheck disable=SC2028
 echo "
-
+import os
 import datetime as d
 import time
 import telebot
