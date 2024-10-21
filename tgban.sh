@@ -43,14 +43,14 @@ load_dotenv()
 bot = telebot.TeleBot(os.getenv(\"BOT_TOKEN\"))
 
 # Set the chat ID to send the file to
-chat_id = os.getenv(\"CHAT_ID\")
+chat_id = os.getenv('CHAT_ID')
 
-TIME = os.getenv(\"TIME\")
+TIME = os.getenv('TIME')
 
 date_format_code = '%Y/%m/%d %H:%M:%S'
 
-url: str = os.getenv(\"SUPABASE_URL\")
-key: str = os.getenv(\"SUPABASE_KEY\")
+url: str = os.getenv('SUPABASE_URL')
+key: str = os.getenv('SUPABASE_KEY')
 supabase: Client = create_client(url, key)
 
 # message user tg
@@ -84,7 +84,7 @@ def main(time_now):
                         tg_admin_message(user_id, status, time)
 
                 try:
-                    supabase.table(\"ban\").insert(
+                    supabase.table('ban').insert(
                         {'created_at': int(time.timestamp()), 'user_id': user_id, 'status': status}).execute()
                     print('CREATE')
                 except Exception as exception:
